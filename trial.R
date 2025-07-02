@@ -1,0 +1,5 @@
+Fertilizers=c("W","X","Y","Z")
+A=c(6,7,3,8)
+B=c(5,5,3,7)
+C=c(5,4,3,4)
+Wheat_production=data.frame(Fertilizers,A,B,C)
