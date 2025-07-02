@@ -1,0 +1,26 @@
+#ONE WAY ANOVA METHOD
+A=c(6,7,3,8)
+B=c(5,5,3,7)
+C=c(5,4,3,4)
+n=c(length(A),length(B),length(C))
+Wheat_production=data.frame(A,B,C)
+X=c(mean(Wheat_production$A),mean(Wheat_production$B),mean(Wheat_production$C))
+Grand_mean=mean(X)
+ss_bet=sum(n*(X-Grand_mean)^2)
+ss_within=sum(sum((Wheat_production$A-X[1])^2),sum((Wheat_production$B-X[2])^2),sum((Wheat_production$C-X[3])^2))
+ss_total=sum((Wheat_production-Grand_mean)^2)  
+Source_of_variation=c("Between Samples","Within Samples","Total")
+Sum_of_Squares=c(ss_bet,ss_within,ss_total)
+Degree_of_freedom=c(ncol(Wheat_production)-1,sum(n)-ncol(Wheat_production),sum(n)-1)
+Mean_Squares=c(Sum_of_Squares[1:2]/Degree_of_freedom[1:2],0)
+F_ratio=c(Mean_Squares[1]/Mean_Squares[2],0,0)
+ANOVA_table=data.frame(Source_of_variation,Sum_of_Squares,Degree_of_freedom,Mean_Squares,F_ratio)
+#DIRECT METHOD
+Wheat<-c(rep('A',nrow(Wheat_production)),rep('B',nrow(Wheat_production)),rep('C',nrow(Wheat_production)))
+Plot<-c(Wheat_production$A,Wheat_production$B,Wheat_production$C)
+is.factor(Wheat)
+Wheat<-factor(Wheat)
+Wheat_production.aov<-aov(Plot~Wheat)
+summary(Wheat_production.aov)
+#ONE WAY ANOVA SHORT-CUT METHOD
+
